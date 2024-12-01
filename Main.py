@@ -1,23 +1,64 @@
 from kivy.app import App
+from kivy.graphics import Rectangle, Color
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
+from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
 from kivy.uix.textinput import TextInput
 
-class MainApp(App):
-    def build(self):
-        # Ställer in ikonen för appen (valfritt)
-        #self.icon = "C:/Users/Wafaa.almaliki/OneDrive -
-        #Academedia/Desktop/PythonIcon/icons8-
-        #calculator-50.png"
+import Graph
+from Parser import NumericStringParser
 
+
+class MainScreen(Screen):
+    def on_button_press(self, instance):
+        current = self.solution.text  # Nuvarande text i displayen
+        button_text = instance.text  # Texten på knappen som trycktes
+
+        if button_text == "C":
+            # Om knappen är "C", rensa displayen
+            self.solution.text = ""
+            return
+            # Förhindra att två operatorer trycks efter varandra
+
+        # if  len(self.solution.text) > 2 and self.solution.text[len(self.solution.text)-2] in self.operators:
+        #    return
+        # Lägg till texten på knappen till displayen
+        self.solution.text += button_text
+
+    def on_solution(self, instance):
+        """Beräknar lösningen."""
+        try:
+            # Utvärdera uttrycket och visa resultatet
+            self.solution.text = str(self.parser.eval(self.solution.text))
+        except Exception:
+            # Vid fel, visa "Error"
+            self.solution.text = "Error"
+
+    def _on_graph(self,instance):
+        app.root.current = "graph"
+
+    def __init__(self, **kwargs):
+        super(MainScreen, self).__init__(**kwargs)
+
+        self.parser = NumericStringParser()
         # Definiera operatörer och spårning
         self.operators = ["/", "*", "+", "-"]
-        self.last_was_operator = None
-        self.last_button = None
-
         # Skapa huvudlayouten (vertikal)
-        main_layout = BoxLayout(orientation="vertical")
+        self.main_layout = BoxLayout(orientation="horizontal")
+        self.add_widget(self.main_layout)
 
+        self.graph_button = Button(
+            #background_normal="graph_normal.png",
+            #background_down="graph_down.png",
+            text= "Graph",
+            size_hint=(.2, .2),
+            pos_hint={"x":0,"y":.8}
+        )
+        self.graph_button.bind(on_press=self._on_graph)
+        self.main_layout.add_widget(self.graph_button)
+
+        self.calc_layout = BoxLayout(orientation="vertical")
+        self.main_layout.add_widget(self.calc_layout)
         # Skapa textfältet som fungerar som kalkylatorns
         # display
         self.solution = TextInput(
@@ -25,17 +66,18 @@ class MainApp(App):
             foreground_color="white",
             multiline=False,
             readonly=True,
-            halign="right",
-            font_size=30,
+            halign="left",
+            size_hint=(1,1),
+            font_size=50,
         )
-        main_layout.add_widget(self.solution)
+        self.calc_layout.add_widget(self.solution)
 
         # Skapa knapparna för kalkylatorn
         buttons = [
-        ["7", "8", "9", "/"],
-        ["4", "5", "6", "*"],
-        ["1", "2", "3", "+"],
-        [".", "0", "C", "-"],
+            ["7", "8", "9", "/"],
+            ["4", "5", "6", "*"],
+            ["1", "2", "3", "+"],
+            [".", "0", "C", "-"],
 
         ]
 
@@ -46,56 +88,45 @@ class MainApp(App):
                 button = Button(
                     text=label,
                     font_size=30,
-                    background_color=(0.5, 0.5, 0.5, 1), # Grå färg
+                    background_color=(0.5, 0.5, 0.5, 1),  # Grå färg
                     pos_hint={"center_x": 0.5, "center_y": 0.5},
                 )
-                # Koppla knapptryckningar till on_button_press
                 button.bind(on_press=self.on_button_press)
                 h_layout.add_widget(button)
-            main_layout.add_widget(h_layout)
-
-        # Skapa likamed-knappen
+            self.calc_layout.add_widget(h_layout)
 
         equal_button = Button(
-        text="=",
-        font_size=30,
-        background_color=(0.5, 0.8, 0.5, 1), # Grön färg
-        pos_hint={"center_x": 0.5, "center_y": 0.5},
+            text="=",
+            font_size=30,
+            background_color=(0.5, 0.8, 0.5, 1),  # Grön färg
+            pos_hint={"center_x": 0.5, "center_y": 0.5},
         )
         equal_button.bind(on_press=self.on_solution)
-        main_layout.add_widget(equal_button)
+        self.calc_layout.add_widget(equal_button)
 
-        return main_layout
+class MainApp(App):
+    def build(self):
+        self.icon = ".\\icon.png"
 
-    def on_button_press(self, instance):
-        current = self.solution.text # Nuvarande text idisplayen
-        button_text = instance.text # Texten på knappensom trycktes
+        self.root = ScreenManager(transition=NoTransition())
+        self.root.add_widget(Graph.GraphScreen(name="graph"))
+        self.root.add_widget(MainScreen(name="main"))
 
-        if button_text == "C":
+        self.root.current = "main"
 
-            # Om knappen är "C", rensa displayen
-            self.solution.text = ""
-        else:
-            # Förhindra att två operatorer trycks efter varandra
-            if current and (self.last_was_operator and
-                button_text in self.operators):
-                return
-            elif button_text in self.operators:
-                self.last_was_operator = True
-            else:
-                self.last_was_operator = False
-                # Lägg till texten på knappen till displayen
-                self.solution.text += button_text
+        self.root.bind(size=self._update_rect, pos=self._update_rect)
+        # Background Color
 
-    def on_solution(self, instance):
-        """Beräknar lösningen."""
-        try:
-        # Utvärdera uttrycket och visa resultatet
-            self.solution.text = str(eval(self.solution.text))
-        except Exception:
-        # Vid fel, visa "Error"
-            self.solution.text = "Error"
+        with self.root.canvas.before:
+            Color(.09, .09, .13, 1)
+            self.rect = Rectangle(size=self.root.size, pos=self.root.pos)
+        return self.root
 
+    def _update_rect(self, instance, _value):
+        self.rect.pos = instance.pos
+        self.rect.size = instance.size
+
+
+app = MainApp()
 if __name__ == "__main__":
-    app = MainApp()
     app.run()
