@@ -6,6 +6,8 @@ from kivy.uix.button import Button
 
 from Parser import NumericStringParser
 
+
+
 class GraphScreen(Screen):
     scale = 16
     detail = 3
