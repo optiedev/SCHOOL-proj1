@@ -6,6 +6,8 @@ from kivy.uix.button import Button
 
 from Parser import NumericStringParser
 
+
+
 class GraphScreen(Screen):
     scale = 16
     detail = 3
@@ -73,7 +75,7 @@ class GraphScreen(Screen):
         x = 0
         maxy = self.height * self.scale
 
-        for _ in range(800):
+        for _ in range(int(800/self.scale * self.detail)):
             x+=1
             if self.parse_function(x) >= maxy:
                 break
