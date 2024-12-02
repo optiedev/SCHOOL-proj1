@@ -1,7 +1,3 @@
-import sys
-
-from altgraph.Graph import Graph
-from docutils.nodes import image
 from kivy.graphics import *
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import Screen

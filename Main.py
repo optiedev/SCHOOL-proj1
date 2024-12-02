@@ -11,14 +11,21 @@ from Parser import NumericStringParser
 
 class MainScreen(Screen):
     def on_button_press(self, instance):
-        current = self.solution.text  # Nuvarande text i displayen
-        button_text = instance.text  # Texten på knappen som trycktes
+        current : str = self.solution.text  # Nuvarande text i displayen
+        button_text : str = instance.text  # Texten på knappen som trycktes
 
         if button_text == "C":
             # Om knappen är "C", rensa displayen
             self.solution.text = ""
             return
             # Förhindra att två operatorer trycks efter varandra
+        elif button_text == "xⁿ":
+            button_text = "^"
+        elif button_text == "<":
+            self.solution.text = self.solution.text[:-1]
+            return
+        elif len(button_text) > 2:
+            button_text = button_text + "("
 
         # if  len(self.solution.text) > 2 and self.solution.text[len(self.solution.text)-2] in self.operators:
         #    return
@@ -87,12 +94,24 @@ class MainScreen(Screen):
 
         # Skapa knapparna för kalkylatorn
         buttons = [
-            ["7", "8", "9", "/"],
-            ["4", "5", "6", "*"],
-            ["1", "2", "3", "+"],
-            [".", "0", "C", "-"],
+            ["(",")","xⁿ","/"],
+            ["7", "8", "9", "*"],
+            ["4", "5", "6", "+"],
+            ["1", "2", "3", "-"],
+            [".", "0", "C", "<"],
 
         ]
+
+        additionalButtons = ["sin", "cos", "tan"]
+
+
+        ab_layout =BoxLayout(orientation="vertical", size_hint=(.3,1))
+        for button in additionalButtons:
+            _button = Button(text=button,background_color=(0.5, 0.5, 0.5, 1))
+            ab_layout.add_widget(_button)
+
+        # self.calc_layout.add_widget(ab_layout)
+
 
         # Lägg till knapparna i huvudlayouten
         for row in buttons:
