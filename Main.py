@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.graphics import Rectangle, Color
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
+from kivy.uix.gridlayout import GridLayout
 from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
 from kivy.uix.textinput import TextInput
 from kivy.uix.label import Label
@@ -45,11 +46,37 @@ class MainScreen(Screen):
     def _on_graph(self,instance):
         app.root.current = "graph"
 
+    def on_buttonSwitch_pressed(self,instance):
+        if self.functionSwitch == 0:
+            self.functionSwitch = 1
+
+            self.additionalButtons = [
+                ["atan", "asin", "acos"],
+                ["tanh", "sinh", "cosh"],
+                ["atanh", "asinh", "acosh"]
+                ]
+        elif self.functionSwitch == 1:
+            self.functionSwitch = 0
+            self.additionalButtons = [
+                ["tan", "sin", "cos"],
+                ["In", "log", "1/"],
+                ["e^", "^2", "+"],
+                ["abs", "pi", "e"]
+                ]
+
     def more_buttons_pressed(self,instance):
-        self.calc_layout.add_widget(self.additionalButtonsLayout)
+        if self.moreButtonsShowing == 0:
+            self.moreButtonsShowing = 1
+            self.calc_layout.add_widget(self.additionalButtonsLayout)
+        elif self.moreButtonsShowing == 1:
+            self.moreButtonsShowing = 0
+            self.calc_layout.remove_widget(self.additionalButtonsLayout)
+
 
     def __init__(self, **kwargs):
             super(MainScreen, self).__init__(**kwargs)
+            self.moreButtonsShowing = 0
+            self.functionSwitch = 0
 
             self.parser = NumericStringParser()
             # Definiera operatörer och spårning
@@ -92,13 +119,13 @@ class MainScreen(Screen):
                 multiline=False,
                 readonly=True,
                 halign="left",
-                size_hint=(1,1),
+                size_hint=(1,.2),
                 font_size=50,
             )
             self.calc_layout.add_widget(self.solution)
 
             # Skapa knapparna för kalkylatorn
-            buttons = [
+            self.buttons = [
                 ["(",")","xⁿ","/"],
                 ["7", "8", "9", "*"],
                 ["4", "5", "6", "+"],
@@ -107,36 +134,9 @@ class MainScreen(Screen):
 
             ]
 
-            additionalButtons = [Button(
-                        text="sin",
-                        font_size=30,
-                        background_color=(0.5, 0.5, 0.5, 1),  # Grå färg
-                        pos_hint={"center_x": 0.5, "center_y": 0.5},
-                    ), Button(
-                        text="cos",
-                        font_size=30,
-                        background_color=(0.5, 0.5, 0.5, 1),  # Grå färg
-                        pos_hint={"center_x": 0.5, "center_y": 0.5},
-                    ), Button(
-                        text="tan",
-                        font_size=30,
-                        background_color=(0.5, 0.5, 0.5, 1),  # Grå färg
-                        pos_hint={"center_x": 0.5, "center_y": 0.5},
-                    )]
+            self.ButtonLayout = GridLayout(cols=4, size_hint=(1,.8))
 
-            self.additionalButtonsLayout = BoxLayout()
-
-            for button in additionalButtons:
-                button.bind(on_press=self.on_button_press)
-                self.additionalButtonsLayout.add_widget(button)
-
-            # self.calc_layout.add_widget(ab_layout
-
-            # Lägg till knapparna i huvudlayouten
-
-
-            for row in buttons:
-                h_layout = BoxLayout()
+            for row in self.buttons:
                 for label in row:
                     button = Button(
                         text=label,
@@ -145,15 +145,51 @@ class MainScreen(Screen):
                         pos_hint={"center_x": 0.5, "center_y": 0.5},
                     )
                     button.bind(on_press=self.on_button_press)
-                    h_layout.add_widget(button)
-                self.calc_layout.add_widget(h_layout)
+                    self.ButtonLayout.add_widget(button)
+            self.calc_layout.add_widget(self.ButtonLayout)
+
+
+            self.additionalButtons = [
+                ["tan", "sin", "cos"],
+                ["In", "log", "1/"],
+                ["e^", "^2", "+"],
+                ["abs", "pi", "e"]
+                ]
+
+            self.additionalButtonsLayout = GridLayout(cols=4, size_hint=(1,.8))
+
+            for row in self.additionalButtons:
+                for label in row:
+                    button = Button(
+                        text=label,
+                        font_size=30,
+                        background_color=(0.5, 0.5, 0.5, 1),  # Grå färg
+                        pos_hint={"center_x": 0.5, "center_y": 0.5},
+                    )
+                    button.bind(on_press=self.on_button_press)
+                    self.additionalButtonsLayout.add_widget(button)
+
+            self.switchInversity = Button(
+                text="AlternateFunctions",
+                font_size=30,
+                background_color=(0.5, 0.5, 0.5, 1),  # Grå färg
+                pos_hint={"center_x": 0.5, "center_y": 0.5},
+            )
+
+            self.switchInversity.bind(on_press = self.on_buttonSwitch_pressed)
+            self.additionalButtonsLayout.add_widget(self.switchInversity)
+
+
+
 
             equal_button = Button(
                 text="=",
                 font_size=30,
                 background_color=(0.5, 0.8, 0.5, 1),  # Grön färg
                 pos_hint={"center_x": 0.5, "center_y": 0.5},
+                size_hint=(1,.2)
             )
+
             equal_button.bind(on_press=self.on_solution)
             self.calc_layout.add_widget(equal_button)
 
