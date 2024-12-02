@@ -42,6 +42,7 @@ class NumericStringParser(object):
         term    :: factor [ multop factor ]*
         expr    :: term [ addop term ]*
         """
+        x = Literal("x")
         point = Literal(".")
         e = CaselessLiteral("E")
         fnumber = Combine(Word("+-" + nums, nums) +

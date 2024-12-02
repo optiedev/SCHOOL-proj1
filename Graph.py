@@ -1,7 +1,3 @@
-import sys
-
-from altgraph.Graph import Graph
-from docutils.nodes import image
 from kivy.graphics import *
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import Screen
@@ -77,7 +73,7 @@ class GraphScreen(Screen):
         x = 0
         maxy = self.height * self.scale
 
-        for _ in range(800):
+        for _ in range(int(800/self.scale * self.detail)):
             x+=1
             if self.parse_function(x) >= maxy:
                 break
