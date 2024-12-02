@@ -4,6 +4,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
 from kivy.uix.textinput import TextInput
+from kivy.uix.label import Label
 
 import Graph
 from Parser import NumericStringParser
@@ -44,97 +45,117 @@ class MainScreen(Screen):
     def _on_graph(self,instance):
         app.root.current = "graph"
 
+    def more_buttons_pressed(self,instance):
+        self.calc_layout.add_widget(self.additionalButtonsLayout)
+
     def __init__(self, **kwargs):
-        super(MainScreen, self).__init__(**kwargs)
+            super(MainScreen, self).__init__(**kwargs)
 
-        self.parser = NumericStringParser()
-        # Definiera operatörer och spårning
-        self.operators = ["/", "*", "+", "-"]
-        # Skapa huvudlayouten (vertikal)
-        self.main_layout = BoxLayout(orientation="horizontal")
-        self.add_widget(self.main_layout)
+            self.parser = NumericStringParser()
+            # Definiera operatörer och spårning
+            self.operators = ["/", "*", "+", "-"]
+            # Skapa huvudlayouten (vertikal)
+            self.main_layout = BoxLayout(orientation="horizontal")
+            self.add_widget(self.main_layout)
 
-        self.left_layout = BoxLayout(orientation="vertical",size_hint=(.2,1))
-        self.graph_button = Button(
-            #background_normal="graph_normal.png",
-            #background_down="graph_down.png",
-            text= "Graph",
-            size_hint=(1, .2),
-            pos_hint={"x":0,"y":.8}
-        )
-        self.graph_button.bind(on_press=self._on_graph)
+            self.left_layout = BoxLayout(orientation="vertical",size_hint=(.2,1))
+            self.graph_button = Button(
+                #background_normal="graph_normal.png",
+                #background_down="graph_down.png",
+                text= "Graph",
+                size_hint=(1, .2),
+                pos_hint={"x":0,"y":.8}
+            )
+            self.graph_button.bind(on_press=self._on_graph)
 
-        self.more_functions = Button(
-            #background_normal="graph_normal.png",
-            #background_down="graph_down.png",
-            text= "More stuff",
-            size_hint=(1, .8),
-            #pos_hint={"x":0,"y":0}
-        )
-        self.left_layout.add_widget(self.graph_button)
-        self.left_layout.add_widget(self.more_functions)
+            self.more_functions = Button(
+                #background_normal="graph_normal.png",
+                #background_down="graph_down.png",
+                text= "More stuff",
+                size_hint=(1, .8),
+                #pos_hint={"x":0,"y":0}
+            )
+            self.more_functions.bind(on_press=self.more_buttons_pressed)
+            self.left_layout.add_widget(self.graph_button)
+            self.left_layout.add_widget(self.more_functions)
 
-        self.main_layout.add_widget(self.left_layout)
-
-
-        self.calc_layout = BoxLayout(orientation="vertical",size_hint=(.8,1))
-        self.main_layout.add_widget(self.calc_layout)
-        # Skapa textfältet som fungerar som kalkylatorns
-        # display
-        self.solution = TextInput(
-            background_color="black",
-            foreground_color="white",
-            multiline=False,
-            readonly=True,
-            halign="left",
-            size_hint=(1,1),
-            font_size=50,
-        )
-        self.calc_layout.add_widget(self.solution)
-
-        # Skapa knapparna för kalkylatorn
-        buttons = [
-            ["(",")","xⁿ","/"],
-            ["7", "8", "9", "*"],
-            ["4", "5", "6", "+"],
-            ["1", "2", "3", "-"],
-            [".", "0", "C", "<"],
-
-        ]
-
-        additionalButtons = ["sin", "cos", "tan"]
+            self.main_layout.add_widget(self.left_layout)
 
 
-        ab_layout =BoxLayout(orientation="vertical", size_hint=(.3,1))
-        for button in additionalButtons:
-            _button = Button(text=button,background_color=(0.5, 0.5, 0.5, 1))
-            ab_layout.add_widget(_button)
+            self.calc_layout = BoxLayout(orientation="vertical",size_hint=(.8,1))
+            self.main_layout.add_widget(self.calc_layout)
+            # Skapa textfältet som fungerar som kalkylatorns
+            # display
+            self.solution = TextInput(
+                background_color="black",
+                foreground_color="white",
+                multiline=False,
+                readonly=True,
+                halign="left",
+                size_hint=(1,1),
+                font_size=50,
+            )
+            self.calc_layout.add_widget(self.solution)
 
-        # self.calc_layout.add_widget(ab_layout)
+            # Skapa knapparna för kalkylatorn
+            buttons = [
+                ["(",")","xⁿ","/"],
+                ["7", "8", "9", "*"],
+                ["4", "5", "6", "+"],
+                ["1", "2", "3", "-"],
+                [".", "0", "C", "<"],
 
+            ]
 
-        # Lägg till knapparna i huvudlayouten
-        for row in buttons:
-            h_layout = BoxLayout()
-            for label in row:
-                button = Button(
-                    text=label,
-                    font_size=30,
-                    background_color=(0.5, 0.5, 0.5, 1),  # Grå färg
-                    pos_hint={"center_x": 0.5, "center_y": 0.5},
-                )
+            additionalButtons = [Button(
+                        text="sin",
+                        font_size=30,
+                        background_color=(0.5, 0.5, 0.5, 1),  # Grå färg
+                        pos_hint={"center_x": 0.5, "center_y": 0.5},
+                    ), Button(
+                        text="cos",
+                        font_size=30,
+                        background_color=(0.5, 0.5, 0.5, 1),  # Grå färg
+                        pos_hint={"center_x": 0.5, "center_y": 0.5},
+                    ), Button(
+                        text="tan",
+                        font_size=30,
+                        background_color=(0.5, 0.5, 0.5, 1),  # Grå färg
+                        pos_hint={"center_x": 0.5, "center_y": 0.5},
+                    )]
+
+            self.additionalButtonsLayout = BoxLayout()
+
+            for button in additionalButtons:
                 button.bind(on_press=self.on_button_press)
-                h_layout.add_widget(button)
-            self.calc_layout.add_widget(h_layout)
+                self.additionalButtonsLayout.add_widget(button)
 
-        equal_button = Button(
-            text="=",
-            font_size=30,
-            background_color=(0.5, 0.8, 0.5, 1),  # Grön färg
-            pos_hint={"center_x": 0.5, "center_y": 0.5},
-        )
-        equal_button.bind(on_press=self.on_solution)
-        self.calc_layout.add_widget(equal_button)
+            # self.calc_layout.add_widget(ab_layout
+
+            # Lägg till knapparna i huvudlayouten
+
+
+            for row in buttons:
+                h_layout = BoxLayout()
+                for label in row:
+                    button = Button(
+                        text=label,
+                        font_size=30,
+                        background_color=(0.5, 0.5, 0.5, 1),  # Grå färg
+                        pos_hint={"center_x": 0.5, "center_y": 0.5},
+                    )
+                    button.bind(on_press=self.on_button_press)
+                    h_layout.add_widget(button)
+                self.calc_layout.add_widget(h_layout)
+
+            equal_button = Button(
+                text="=",
+                font_size=30,
+                background_color=(0.5, 0.8, 0.5, 1),  # Grön färg
+                pos_hint={"center_x": 0.5, "center_y": 0.5},
+            )
+            equal_button.bind(on_press=self.on_solution)
+            self.calc_layout.add_widget(equal_button)
 
 class MainApp(App):
     def build(self):
