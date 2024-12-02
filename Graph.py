@@ -1,3 +1,5 @@
+import sys
+
 from altgraph.Graph import Graph
 from docutils.nodes import image
 from kivy.graphics import *
@@ -55,11 +57,13 @@ class GraphScreen(Screen):
 
 
         self.create_line()
-        # self.draw_line()
 
 
     def parse_function(self, x):
-        fn_text = self.function_input.text[5:]
+        fn_text : str = self.function_input.text[5:]
+
+        # x_indices = ([pos for pos, char in enumerate(fn_text) if char == "x"])
+
         fn_text = fn_text.replace("x",str(x))
 
         return self.parser.eval(fn_text)
@@ -73,7 +77,7 @@ class GraphScreen(Screen):
         x = 0
         maxy = self.height * self.scale
 
-        for _ in range(600):
+        for _ in range(800):
             x+=1
             if self.parse_function(x) >= maxy:
                 break
@@ -89,7 +93,6 @@ class GraphScreen(Screen):
 
     def draw_line(self):
         aspect = self.width / self.height
-        print(aspect)
 
         points = self.points
         points = [point * self.scale for point in points]

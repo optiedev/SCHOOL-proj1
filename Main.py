@@ -47,17 +47,30 @@ class MainScreen(Screen):
         self.main_layout = BoxLayout(orientation="horizontal")
         self.add_widget(self.main_layout)
 
+        self.left_layout = BoxLayout(orientation="vertical",size_hint=(.2,1))
         self.graph_button = Button(
             #background_normal="graph_normal.png",
             #background_down="graph_down.png",
             text= "Graph",
-            size_hint=(.2, .2),
+            size_hint=(1, .2),
             pos_hint={"x":0,"y":.8}
         )
         self.graph_button.bind(on_press=self._on_graph)
-        self.main_layout.add_widget(self.graph_button)
 
-        self.calc_layout = BoxLayout(orientation="vertical")
+        self.more_functions = Button(
+            #background_normal="graph_normal.png",
+            #background_down="graph_down.png",
+            text= "More stuff",
+            size_hint=(1, .8),
+            #pos_hint={"x":0,"y":0}
+        )
+        self.left_layout.add_widget(self.graph_button)
+        self.left_layout.add_widget(self.more_functions)
+
+        self.main_layout.add_widget(self.left_layout)
+
+
+        self.calc_layout = BoxLayout(orientation="vertical",size_hint=(.8,1))
         self.main_layout.add_widget(self.calc_layout)
         # Skapa textfältet som fungerar som kalkylatorns
         # display
