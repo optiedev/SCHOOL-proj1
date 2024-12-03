@@ -5,6 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5987166a-ea31-4bba-ba72-c1e30d60d2e6" name="Changes" comment="Fixade SwitchAlteratebutton funktionerna">
+      <change afterPath="$PROJECT_DIR$/morse.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Calc.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Calc.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
     </list>

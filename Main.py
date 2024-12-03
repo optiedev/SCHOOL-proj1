@@ -5,6 +5,7 @@ from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
 from kivy.uix.textinput import TextInput
+from kivy.core.audio import SoundLoader
 from kivy.uix.label import Label
 
 import Graph
@@ -15,6 +16,9 @@ class MainScreen(Screen):
     def on_button_press(self, instance):
         current : str = self.solution.text  # Nuvarande text i displayen
         button_text : str = instance.text  # Texten på knappen som trycktes
+        sound = SoundLoader.load(r"morse.mp3")  # Byt ut till din ljudfil
+        if sound:
+            sound.play()  # Spela upp ljudet
 
         if button_text == "C":
             # Om knappen är "C", rensa displayen
@@ -34,11 +38,18 @@ class MainScreen(Screen):
         # Lägg till texten på knappen till displayen
         self.solution.text += button_text
 
+    def on_history_pressed(self, instance):
+        self.solution_history.append(str(self.solution.text))
+
+
     def on_solution(self, instance):
         """Beräknar lösningen."""
         try:
             # Utvärdera uttrycket och visa resultatet
             self.solution.text = str(self.parser.eval(self.solution.text))
+
+
+
         except Exception:
             # Vid fel, visa "Error"
             self.solution.text = "Error"
@@ -104,6 +115,7 @@ class MainScreen(Screen):
             super(MainScreen, self).__init__(**kwargs)
             self.moreButtonsShowing = 0
             self.functionSwitch = 0
+            self.solution_history = []
 
             self.parser = NumericStringParser()
             # Definiera operatörer och spårning
@@ -130,10 +142,21 @@ class MainScreen(Screen):
                 size_hint=(1, .8),
                 #pos_hint={"x":0,"y":0}
             )
+
+            self.show_solution_history = Button(
+                text="History",
+                font_size=30,
+                background_color=(0.5, 0.5, 0.5, 1),  # Grå färg
+                pos_hint={"center_x": 0.5, "center_y": 0.5},
+            )
+
+            self.show_solution_history.bind(on_press=self.on_history_pressed)
+
+
             self.more_functions.bind(on_press=self.more_buttons_pressed)
             self.left_layout.add_widget(self.graph_button)
             self.left_layout.add_widget(self.more_functions)
-
+            self.left_layout.add_widget(self.show_solution_history)
             self.main_layout.add_widget(self.left_layout)
 
 
