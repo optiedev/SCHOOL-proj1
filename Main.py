@@ -46,14 +46,21 @@ class MainScreen(Screen):
     def _on_graph(self,instance):
         app.root.current = "graph"
 
+
     # Updaterar additionalButtons i additionalButtonLayouten.
     def update_buttons(self):
         self.additionalButtonsLayout.clear_widgets()
 
         for row in self.additionalButtons:
             for label in row:
-                btn = Button(text=label)
-                self.additionalButtonsLayout.add_widget(btn)
+                button = Button(
+                    text=label,
+                    font_size=30,
+                    background_color=(0.5, 0.5, 0.5, 1),  # Grå färg
+                    pos_hint={"center_x": 0.5, "center_y": 0.5},
+                )
+                button.bind(on_press=self.on_button_press)
+                self.additionalButtonsLayout.add_widget(button)
 
     # Switchar knapparna
     def on_buttonSwitch_pressed(self,instance):
@@ -68,7 +75,7 @@ class MainScreen(Screen):
 
             # Kallar på updaterings funktionen och lägger tilbaks bytes knappen.
             self.update_buttons()
-            self.additionalButtonsLayout.add_widget(self.switchInversity)
+            self.additionalButtonsLayout.add_widget(self.switchFunctions)
 
         elif self.functionSwitch == 1:
             self.functionSwitch = 0
@@ -81,8 +88,9 @@ class MainScreen(Screen):
 
             # Kallar på updaterings funktionen och lägger tilbaks bytes knappen.
             self.update_buttons()
-            self.additionalButtonsLayout.add_widget(self.switchInversity)
+            self.additionalButtonsLayout.add_widget(self.switchFunctions)
 
+    # Definerar vad som händer när knappen är tryckt. Det ska tilläga eller ta bort additionalButtonLayouten.
     def more_buttons_pressed(self,instance):
         if self.moreButtonsShowing == 0:
             self.moreButtonsShowing = 1
@@ -114,10 +122,11 @@ class MainScreen(Screen):
             )
             self.graph_button.bind(on_press=self._on_graph)
 
+            # Knapp som ska tilläga eller ta bort additionalbuttonlayouten med kallalse av funktionen more_buttons_pressed.
             self.more_functions = Button(
                 #background_normal="graph_normal.png",
                 #background_down="graph_down.png",
-                text= "More stuff",
+                text= "More functions",
                 size_hint=(1, .8),
                 #pos_hint={"x":0,"y":0}
             )
@@ -188,15 +197,15 @@ class MainScreen(Screen):
                     button.bind(on_press=self.on_button_press)
                     self.additionalButtonsLayout.add_widget(button)
 
-            self.switchInversity = Button(
-                text="AlternateFunctions",
+            self.switchFunctions = Button(
+                text="ChangeFunctions",
                 font_size=30,
-                background_color=(0.5, 0.5, 0.5, 1),  # Grå färg
+                background_color=(0.6, 0.8, 0.8,),  # Turkås färg
                 pos_hint={"center_x": 0.5, "center_y": 0.5},
             )
 
-            self.switchInversity.bind(on_press = self.on_buttonSwitch_pressed)
-            self.additionalButtonsLayout.add_widget(self.switchInversity)
+            self.switchFunctions.bind(on_press = self.on_buttonSwitch_pressed)
+            self.additionalButtonsLayout.add_widget(self.switchFunctions)
 
 
 

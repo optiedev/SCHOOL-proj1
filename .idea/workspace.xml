@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5987166a-ea31-4bba-ba72-c1e30d60d2e6" name="Changes" comment="added even more buttons">
+    <list default="true" id="5987166a-ea31-4bba-ba72-c1e30d60d2e6" name="Changes" comment="Fixade SwitchAlteratebutton funktionerna">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
     </list>
@@ -99,7 +99,14 @@
       <option name="presentableId" value="LOCAL−00004" />
       <updated>1733154983659</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL−00005" summary="Fixade SwitchAlteratebutton funktionerna">
+      <option name="closed" value="true" />
+      <created>1733218303962</created>
+      <option name="number" value="LOCAL−00005" />
+      <option name="presentableId" value="LOCAL−00005" />
+      <updated>1733218303962</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -107,17 +114,7 @@
     <MESSAGE value="Added buttons" />
     <MESSAGE value="Added more buttons" />
     <MESSAGE value="added even more buttons" />
-    <option name="LAST_COMMIT_MESSAGE" value="added even more buttons" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Main.py</url>
-          <line>16</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Fixade SwitchAlteratebutton funktionerna" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixade SwitchAlteratebutton funktionerna" />
   </component>
 </project>
