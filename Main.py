@@ -46,6 +46,16 @@ class MainScreen(Screen):
     def _on_graph(self,instance):
         app.root.current = "graph"
 
+    # Updaterar additionalButtons i additionalButtonLayouten.
+    def update_buttons(self):
+        self.additionalButtonsLayout.clear_widgets()
+
+        for row in self.additionalButtons:
+            for label in row:
+                btn = Button(text=label)
+                self.additionalButtonsLayout.add_widget(btn)
+
+    # Switchar knapparna
     def on_buttonSwitch_pressed(self,instance):
         if self.functionSwitch == 0:
             self.functionSwitch = 1
@@ -55,6 +65,11 @@ class MainScreen(Screen):
                 ["tanh", "sinh", "cosh"],
                 ["atanh", "asinh", "acosh"]
                 ]
+
+            # Kallar på updaterings funktionen och lägger tilbaks bytes knappen.
+            self.update_buttons()
+            self.additionalButtonsLayout.add_widget(self.switchInversity)
+
         elif self.functionSwitch == 1:
             self.functionSwitch = 0
             self.additionalButtons = [
@@ -63,6 +78,10 @@ class MainScreen(Screen):
                 ["e^", "^2", "+"],
                 ["abs", "pi", "e"]
                 ]
+
+            # Kallar på updaterings funktionen och lägger tilbaks bytes knappen.
+            self.update_buttons()
+            self.additionalButtonsLayout.add_widget(self.switchInversity)
 
     def more_buttons_pressed(self,instance):
         if self.moreButtonsShowing == 0:
