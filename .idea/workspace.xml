@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5987166a-ea31-4bba-ba72-c1e30d60d2e6" name="Changes" comment="Way to much">
-      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
+    <list default="true" id="5987166a-ea31-4bba-ba72-c1e30d60d2e6" name="Changes" comment="updated">
+      <change beforePath="$PROJECT_DIR$/.idea/Calc.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Calc.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graph.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/Parser.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +36,11 @@
         </map>
       </branch-storage>
     </favorite-branches>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -47,7 +52,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/optiedev/SCHOOL-proj1.git&quot;,
-    &quot;accountId&quot;: &quot;054e8481-9472-41b5-8fce-01805a9458d1&quot;
+    &quot;accountId&quot;: &quot;b5e93249-439c-4cf9-899b-95354805e704&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -64,7 +69,8 @@
     "Python.Graph.executor": "Debug",
     "Python.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "graph",
+    "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/olof.akerfeldt/Repos/Calc/Main.py",
     "settings.editor.selected.configurable": "preferences.toDoOptions"
   }
@@ -124,12 +130,34 @@
       <option name="presentableId" value="LOCAL−00002" />
       <updated>1733097260395</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL−00003" summary="updated">
+      <option name="closed" value="true" />
+      <created>1733150403905</created>
+      <option name="number" value="LOCAL−00003" />
+      <option name="presentableId" value="LOCAL−00003" />
+      <updated>1733150403905</updated>
+    </task>
+    <task id="LOCAL−00004" summary="updated">
+      <option name="closed" value="true" />
+      <created>1733151167333</created>
+      <option name="number" value="LOCAL−00004" />
+      <option name="presentableId" value="LOCAL−00004" />
+      <updated>1733151167333</updated>
+    </task>
+    <task id="LOCAL−00005" summary="updated">
+      <option name="closed" value="true" />
+      <created>1733154809625</created>
+      <option name="number" value="LOCAL−00005" />
+      <option name="presentableId" value="LOCAL−00005" />
+      <updated>1733154809625</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="INIT" />
     <MESSAGE value="Way to much" />
-    <option name="LAST_COMMIT_MESSAGE" value="Way to much" />
+    <MESSAGE value="updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated" />
   </component>
 </project>
