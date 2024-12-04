@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5987166a-ea31-4bba-ba72-c1e30d60d2e6" name="Changes" comment="Way to much">
-      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
+    <list default="true" id="5987166a-ea31-4bba-ba72-c1e30d60d2e6" name="Changes" comment="Checkout">
+      <change afterPath="$PROJECT_DIR$/Widgets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Calc.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Calc.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graph.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/Parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,10 +64,11 @@
   "keyToString": {
     "Python.Graph.executor": "Debug",
     "Python.Main.executor": "Run",
+    "Python.Widgets.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "dev",
     "last_opened_file_path": "C:/Users/olof.akerfeldt/Repos/Calc/Main.py",
-    "settings.editor.selected.configurable": "preferences.toDoOptions"
+    "settings.editor.selected.configurable": "preferences.keymap"
   }
 }]]></component>
   <component name="RunManager">
