@@ -54,7 +54,10 @@ class MainScreen(Screen):
         app.root.current = "graph"
 
     def on_history(self, instance):
-        self.solution.text += self.history[len(self.history)-1]
+        try:
+            self.solution.text += self.history[len(self.history)-1]
+        except:
+            self.solution.text += "0"
 
 
     def __init__(self, **kwargs):
@@ -83,7 +86,7 @@ class MainScreen(Screen):
             self.top_layout.add_widget(self.to_graph)
 
             self.to_history = Button(
-                    text= "History",
+                    text= "Ans",
                     size_hint=(.2, 1),
                     pos_hint={"x":.8,"y":0},
                     background_normal="button_rect_down.png",

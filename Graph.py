@@ -35,7 +35,7 @@ class GraphScreen(Screen):
         self.function_input.bind(on_text_validate=self.create_line)
         self.input_layout.add_widget(self.function_input)
 
-        self.back = Button(text="Back",font_size=30,size_hint=(.2,None),pos_hint={"x":0,"y":0},background_color=(0.9,0.9,0.9,0.6),height=48)
+        self.back = Button(text="Back",font_size=30,size_hint=(.2,None),pos_hint={"x":0,"y":0},height=48, background_normal="button_rect_down.png", background_down="button_rect_down.png",)
         self.back.bind(on_press = self._on_back)
         self.input_layout.add_widget(self.back)
 
