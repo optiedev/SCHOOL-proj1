@@ -3,8 +3,10 @@ from kivy.graphics import Rectangle, Color
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.relativelayout import RelativeLayout
+from kivy.uix.gridlayout import GridLayout
 from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
 from kivy.uix.textinput import TextInput
+from kivy.core.audio import SoundLoader
 from kivy.uix.label import Label
 from kivy.core.window import Window
 
@@ -13,13 +15,10 @@ from Parser import NumericStringParser
 
 
 class MainScreen(Screen):
-
-
-
-
     def on_button_press(self, instance):
         current : str = self.solution.text  # Nuvarande text i displayen
         button_text : str = instance.text  # Texten på knappen som trycktes
+
 
         if button_text == "C":
             # Om knappen är "C", rensa displayen
@@ -149,6 +148,7 @@ class MainScreen(Screen):
 class MainApp(App):
     def build(self):
         self.icon = ".\\icon.png"
+
         self.root = ScreenManager(transition=NoTransition())
         self.root.add_widget(Graph.GraphScreen(name="graph"))
         self.root.add_widget(MainScreen(name="main"))
